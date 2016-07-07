@@ -7,7 +7,11 @@
 //
 
 import UIKit
+import MapKit
 
 class TravelLocationsMapViewController: UIViewController {
+    
+    @IBOutlet weak var mapView: MKMapView!
+    
     
 }
