@@ -19,6 +19,8 @@
 		95D198C01D2DB95200380496 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 95D198BF1D2DB95200380496 /* Assets.xcassets */; };
 		95D198C31D2DB95200380496 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 95D198C11D2DB95200380496 /* LaunchScreen.storyboard */; };
 		95F7E8FF1D305DF700AA413B /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95F7E8FE1D305DF700AA413B /* CoreDataStack.swift */; };
+		95F7E9011D30662A00AA413B /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95F7E9001D30662A00AA413B /* Constants.swift */; };
+		95F7E9021D30662A00AA413B /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95F7E9001D30662A00AA413B /* Constants.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,6 +50,7 @@
 		95D198C21D2DB95200380496 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		95D198C41D2DB95200380496 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		95F7E8FE1D305DF700AA413B /* CoreDataStack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
+		95F7E9001D30662A00AA413B /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -74,6 +77,7 @@
 				95D198BF1D2DB95200380496 /* Assets.xcassets */,
 				95D198B81D2DB95200380496 /* AppDelegate.swift */,
 				95D198C41D2DB95200380496 /* Info.plist */,
+				95F7E9001D30662A00AA413B /* Constants.swift */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -256,6 +260,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				953D1C3D1D2EAAC20056A57B /* VirtualTouristTests.swift in Sources */,
+				95F7E9021D30662A00AA413B /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -271,6 +276,7 @@
 				95868AFE1D2FD0F7001F4950 /* VirtualTourist.xcdatamodeld in Sources */,
 				95868B041D2FDDE8001F4950 /* Photo.swift in Sources */,
 				95F7E8FF1D305DF700AA413B /* CoreDataStack.swift in Sources */,
+				95F7E9011D30662A00AA413B /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
