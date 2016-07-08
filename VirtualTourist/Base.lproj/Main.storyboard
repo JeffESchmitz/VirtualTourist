@@ -22,7 +22,7 @@
             </objects>
             <point key="canvasLocation" x="-141" y="496"/>
         </scene>
-        <!--Travel Locations Map View Controller-->
+        <!--Virtual Tourist-->
         <scene sceneID="eng-Wh-1z2">
             <objects>
                 <viewController id="Fmo-SH-jmH" customClass="TravelLocationsMapViewController" customModule="VirtualTourist" customModuleProvider="target" sceneMemberID="viewController">
@@ -59,10 +59,11 @@
                             <constraint firstItem="wXm-Z2-ls4" firstAttribute="top" secondItem="AY8-jo-63m" secondAttribute="bottom" id="ZEE-hO-ngw"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="u3t-5A-c8D">
-                        <barButtonItem key="rightBarButtonItem" systemItem="edit" id="esd-Ta-e2f"/>
+                    <navigationItem key="navigationItem" title="Virtual Tourist" id="u3t-5A-c8D">
+                        <barButtonItem key="backBarButtonItem" title="Back" id="K1A-hk-tma"/>
                     </navigationItem>
                     <connections>
+                        <outlet property="deletePinsLabel" destination="ya7-Gp-BTO" id="Nde-Db-VD0"/>
                         <outlet property="mapView" destination="wXm-Z2-ls4" id="4oS-2A-ekT"/>
                     </connections>
                 </viewController>
