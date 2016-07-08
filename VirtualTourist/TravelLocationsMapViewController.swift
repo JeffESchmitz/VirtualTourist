@@ -14,24 +14,52 @@ class TravelLocationsMapViewController: UIViewController {
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var deletePinsLabel: UILabel!
     
+//    var droppedPin: Pin!
+    
+    // MARK: - UIViewController
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let rightButton = UIBarButtonItem(title: "Edit", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(TravelLocationsMapViewController.showEditing(_:)))
+        let rightButton = editButtonItem()
+
         navigationItem.rightBarButtonItem = rightButton
         deletePinsLabel.hidden = true
     }
     
-    func showEditing(sender: UIBarButtonItem)
-    {
-        setEditing(!editing, animated: true)
-        if editing == true {
-            deletePinsLabel.hidden = false
-            navigationItem.rightBarButtonItem?.title = "Done"
-        } else {
-            deletePinsLabel.hidden = true
-            navigationItem.rightBarButtonItem?.title = "Edit"
+    @IBAction func handleAddPinToMap(sender: UILongPressGestureRecognizer) {
+        guard editing == false else {
+            return
         }
         
+        let touchedPosition = sender.locationInView(mapView)
+        let mapCoordinate = mapView.convertPoint(touchedPosition, toCoordinateSpace: mapView)
+        
+        switch sender.state {
+        case .Began:
+//            droppedPin =
+            break
+        
+        case .Changed:
+            
+            break
+        
+        case .Ended, .Cancelled:
+            
+            break
+            
+        default:
+            break
+        }
+    }
+    
+    override func setEditing(editing: Bool, animated: Bool) {
+        super.setEditing(editing, animated: animated)
+        
+        if editing == true {
+            deletePinsLabel.hidden = false
+        } else {
+            deletePinsLabel.hidden = true
+        }
     }
 }
