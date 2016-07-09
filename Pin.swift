@@ -8,7 +8,7 @@
 
 import Foundation
 import CoreData
-
+import MapKit
 
 class Pin: NSManagedObject {
 
@@ -27,3 +27,13 @@ class Pin: NSManagedObject {
     }
 
 }
+
+//// MARK: - MKAnnotaion protocol
+//extension Pin: MKAnnotation {
+//    
+//    // Center latitude and longitude of the annotation view.
+//    // The implementation of this property must be KVO compliant.
+//    public var coordinate: CLLocationCoordinate2D {
+//        
+//    }
+//}

@@ -21,6 +21,8 @@
 		95F7E8FF1D305DF700AA413B /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95F7E8FE1D305DF700AA413B /* CoreDataStack.swift */; };
 		95F7E9011D30662A00AA413B /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95F7E9001D30662A00AA413B /* Constants.swift */; };
 		95F7E9021D30662A00AA413B /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95F7E9001D30662A00AA413B /* Constants.swift */; };
+		95F7E9041D31AF3900AA413B /* UIViewController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95F7E9031D31AF3900AA413B /* UIViewController+Extensions.swift */; };
+		95F7E9051D31AF3900AA413B /* UIViewController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95F7E9031D31AF3900AA413B /* UIViewController+Extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +53,7 @@
 		95D198C41D2DB95200380496 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		95F7E8FE1D305DF700AA413B /* CoreDataStack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 		95F7E9001D30662A00AA413B /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		95F7E9031D31AF3900AA413B /* UIViewController+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extensions.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,6 +81,7 @@
 				95D198B81D2DB95200380496 /* AppDelegate.swift */,
 				95D198C41D2DB95200380496 /* Info.plist */,
 				95F7E9001D30662A00AA413B /* Constants.swift */,
+				95F7E9031D31AF3900AA413B /* UIViewController+Extensions.swift */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -260,6 +264,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				953D1C3D1D2EAAC20056A57B /* VirtualTouristTests.swift in Sources */,
+				95F7E9051D31AF3900AA413B /* UIViewController+Extensions.swift in Sources */,
 				95F7E9021D30662A00AA413B /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -270,6 +275,7 @@
 			files = (
 				95868B061D2FDDE8001F4950 /* Pin.swift in Sources */,
 				953D1BFB1D2DCA9F0056A57B /* TravelLocationsMapViewController.swift in Sources */,
+				95F7E9041D31AF3900AA413B /* UIViewController+Extensions.swift in Sources */,
 				95868B051D2FDDE8001F4950 /* Pin+CoreDataProperties.swift in Sources */,
 				95D198B91D2DB95200380496 /* AppDelegate.swift in Sources */,
 				95868B031D2FDDE8001F4950 /* Photo+CoreDataProperties.swift in Sources */,

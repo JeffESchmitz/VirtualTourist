@@ -9,8 +9,15 @@
 // MARK: Constants accross all clients
 struct Constants {
     
-    static let studentTableViewCell = "StudentTableViewCell"
+    static let MapLatitude          = "MapLatitude"
+    static let MapLongitude         = "MapLongitude"
+    static let MapLatitudeDelta     = "MapLatitudeDelta"
+    static let MapLongitudeDelta    = "MapLongitudeDelta"
     
+    static let DataModelName        = "VirtualTourist"
+    static let Latitude             = "latitude"
+    static let Longitude            = "longitude"
+
     
     struct HttpRequest {
         static let MethodPOST               = "POST"
@@ -25,17 +32,17 @@ struct Constants {
     }
     
     struct FlickrParameterKeys {
-        static let Method = "method"
-        static let APIKey = "api_key"
-        static let GalleryID = "gallery_id"
+        static let Method       = "method"
+        static let APIKey       = "api_key"
+        static let GalleryID    = "gallery_id"
 
     }
     
     struct FlickrParameterValues {
         
-        static let Method = "flickr.photos.search"
-        static let APIKey = "4120b4b57e0c20e206965d809d8d59e4"
-        static let ResponseFormat = "json"
+        static let Method           = "flickr.photos.search"
+        static let APIKey           = "4120b4b57e0c20e206965d809d8d59e4"
+        static let ResponseFormat   = "json"
 
     }
 
