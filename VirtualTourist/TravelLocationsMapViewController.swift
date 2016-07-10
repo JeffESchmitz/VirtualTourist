@@ -5,7 +5,6 @@
 //  Created by Jeff Schmitz on 7/6/16.
 //  Copyright © 2016 Jeff Schmitz. All rights reserved.
 //
-
 import UIKit
 import MapKit
 import CoreData
@@ -16,10 +15,8 @@ class TravelLocationsMapViewController: UIViewController {
     @IBOutlet weak var deletePinsLabel: UILabel!
     
     // MARK: Properties
-//    private var droppedPin: Pin!
     private lazy var droppedPin: Pin = Pin()
     private var coreDataStack: CoreDataStack!
-    
     private lazy var fetchedResultsController: NSFetchedResultsController = {
         
         // Create a fetch request
@@ -37,6 +34,7 @@ class TravelLocationsMapViewController: UIViewController {
         
         return fetchedResultsController
     }()
+    
     
     // MARK: - UIViewController
     override func viewDidLoad() {
@@ -61,6 +59,23 @@ class TravelLocationsMapViewController: UIViewController {
             return
         }
         addPinsToMap(pins)
+    }
+
+    override func setEditing(editing: Bool, animated: Bool) {
+        super.setEditing(editing, animated: animated)
+        
+        if editing == true {
+            deletePinsLabel.hidden = false
+        } else {
+            deletePinsLabel.hidden = true
+        }
+    }
+
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == Constants.OpenPhotoAlbum {
+            let destinationViewController = segue.destinationViewController as! PhotoAlbumViewController
+            destinationViewController.pin = sender as! Pin
+        }
     }
     
     @IBAction func handleAddPinToMap(sender: UILongPressGestureRecognizer) {
@@ -90,17 +105,9 @@ class TravelLocationsMapViewController: UIViewController {
         }
     }
     
-    override func setEditing(editing: Bool, animated: Bool) {
-        super.setEditing(editing, animated: animated)
-        
-        if editing == true {
-            deletePinsLabel.hidden = false
-        } else {
-            deletePinsLabel.hidden = true
-        }
-    }
     
-    func centerMapOnLastLocation() {
+    // MARK: - Class functions
+    private func centerMapOnLastLocation() {
         
         let userDefaults = NSUserDefaults.standardUserDefaults()
         guard (userDefaults.objectForKey(Constants.MapLatitude) != nil
@@ -120,7 +127,7 @@ class TravelLocationsMapViewController: UIViewController {
         mapView.setRegion(coordinateRegion, animated: true)
     }
 
-    func fetchPins() {
+    private func fetchPins() {
         do {
             try fetchedResultsController.performFetch()
         } catch {
@@ -128,7 +135,7 @@ class TravelLocationsMapViewController: UIViewController {
         }
     }
     
-    func addPinsToMap(pins: [Pin]) {
+    private func addPinsToMap(pins: [Pin]) {
         for pin in pins {
             mapView.addAnnotation(pin)
         }
@@ -172,7 +179,20 @@ extension TravelLocationsMapViewController: MKMapViewDelegate {
     }
     
     func mapView(mapView: MKMapView, didSelectAnnotationView view: MKAnnotationView) {
-        fatalError("Not Implemented")
+        
+        guard let pin = view.annotation as? Pin else {
+            displayMessage("setting selected Pin: '\(view.annotation)'", title: "Error")
+            return
+        }
+        
+        if editing {
+            mapView.removeAnnotation(pin)
+            coreDataStack.context.deleteObject(pin)
+            coreDataStack.save()
+        } else {
+            mapView.deselectAnnotation(pin, animated: true)
+            performSegueWithIdentifier(Constants.OpenPhotoAlbum, sender: pin)
+        }
     }
 }
 

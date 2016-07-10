@@ -69,6 +69,7 @@
                     <connections>
                         <outlet property="deletePinsLabel" destination="ya7-Gp-BTO" id="Nde-Db-VD0"/>
                         <outlet property="mapView" destination="wXm-Z2-ls4" id="4oS-2A-ekT"/>
+                        <segue destination="MQT-gH-39y" kind="show" identifier="OpenPhotoAlbum" id="lxt-pX-uu0"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TMJ-8b-9TM" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -78,7 +79,25 @@
                     </connections>
                 </pongPressGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="531" y="513"/>
+            <point key="canvasLocation" x="558" y="496"/>
+        </scene>
+        <!--Photo Album View Controller-->
+        <scene sceneID="o4I-6u-HcB">
+            <objects>
+                <viewController id="MQT-gH-39y" customClass="PhotoAlbumViewController" customModule="VirtualTourist" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="ycy-gv-pBn"/>
+                        <viewControllerLayoutGuide type="bottom" id="Zdc-M0-8D1"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Ehq-Ia-ewL">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ttB-DX-mfi" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1277" y="496"/>
         </scene>
     </scenes>
 </document>

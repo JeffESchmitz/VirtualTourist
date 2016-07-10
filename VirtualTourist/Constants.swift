@@ -20,6 +20,7 @@ struct Constants {
     static let Longitude            = "longitude"
 
     static let MapReuseId           = "Pin"
+    static let OpenPhotoAlbum       = "OpenPhotoAlbum"
     
     struct ColorPalette {
         static let UdacityBlue = UIColor(red:0.01, green:0.70, blue:0.89, alpha:1.0)
