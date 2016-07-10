@@ -93,17 +93,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lvn-if-8aL">
-                                <rect key="frame" x="0.0" y="556" width="600" height="44"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="44" id="e8p-dh-dMf"/>
-                                </constraints>
-                                <items>
-                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="FSQ-rV-CUV"/>
-                                    <barButtonItem title="New Collection" id="xj2-Uf-qb7"/>
-                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="HPr-gt-fLr"/>
-                                </items>
-                            </toolbar>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="ClX-42-Y2e">
                                 <rect key="frame" x="0.0" y="64" width="600" height="150"/>
                                 <constraints>
@@ -145,6 +134,7 @@
                                             <constraint firstItem="yvZ-X7-fCS" firstAttribute="leading" secondItem="grn-Qe-p8o" secondAttribute="leading" id="k8y-KT-l9O"/>
                                         </constraints>
                                         <connections>
+                                            <outlet property="activityIndicatorView" destination="9sB-QP-bkm" id="5eZ-MU-Jzh"/>
                                             <outlet property="cellImageView" destination="yvZ-X7-fCS" id="Oa2-qt-ElD"/>
                                         </connections>
                                     </collectionViewCell>
@@ -156,6 +146,17 @@
                                 <color key="textColor" red="0.0078431372550000003" green="0.70196078429999997" blue="0.89411764709999997" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lvn-if-8aL">
+                                <rect key="frame" x="0.0" y="556" width="600" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="e8p-dh-dMf"/>
+                                </constraints>
+                                <items>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="FSQ-rV-CUV"/>
+                                    <barButtonItem title="New Collection" id="xj2-Uf-qb7"/>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="HPr-gt-fLr"/>
+                                </items>
+                            </toolbar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
