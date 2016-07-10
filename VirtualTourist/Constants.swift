@@ -5,8 +5,9 @@
 //  Created by Jeff Schmitz on 7/8/16.
 //  Copyright © 2016 Jeff Schmitz. All rights reserved.
 //
+import UIKit
 
-// MARK: Constants accross all clients
+// MARK: Constants accross application
 struct Constants {
     
     static let MapLatitude          = "MapLatitude"
@@ -18,6 +19,12 @@ struct Constants {
     static let Latitude             = "latitude"
     static let Longitude            = "longitude"
 
+    static let MapReuseId           = "Pin"
+    
+    struct ColorPalette {
+        static let UdacityBlue = UIColor(red:0.01, green:0.70, blue:0.89, alpha:1.0)
+
+    }
     
     struct HttpRequest {
         static let MethodPOST               = "POST"

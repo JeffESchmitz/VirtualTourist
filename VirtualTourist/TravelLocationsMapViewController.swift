@@ -16,8 +16,9 @@ class TravelLocationsMapViewController: UIViewController {
     @IBOutlet weak var deletePinsLabel: UILabel!
     
     // MARK: Properties
-    private var droppedPin: Pin!
-//    private var coreDataStack: CoreDataStack!
+//    private var droppedPin: Pin!
+    private lazy var droppedPin: Pin = Pin()
+    private var coreDataStack: CoreDataStack!
     
     private lazy var fetchedResultsController: NSFetchedResultsController = {
         
@@ -27,10 +28,10 @@ class TravelLocationsMapViewController: UIViewController {
         // Sort the pins by latitude
         fetchRequest.sortDescriptors = [NSSortDescriptor(key: Constants.Latitude, ascending: true)]
         
-        // Make our FetchedResultsController
-        let stack = (UIApplication.sharedApplication().delegate as! AppDelegate).coreDataStack
+
+        let stackContext = (UIApplication.sharedApplication().delegate as! AppDelegate).coreDataStack.context
         let fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest,
-                                                                  managedObjectContext: stack.context,
+                                                                  managedObjectContext: stackContext,
                                                                   sectionNameKeyPath: nil,
                                                                   cacheName: nil)
         
@@ -45,7 +46,7 @@ class TravelLocationsMapViewController: UIViewController {
         deletePinsLabel.hidden = true
 
         // Set a refence to the CoreDataStack
-//        coreDataStack = (UIApplication.sharedApplication().delegate as! AppDelegate).coreDataStack
+        coreDataStack = (UIApplication.sharedApplication().delegate as! AppDelegate).coreDataStack
         
         centerMapOnLastLocation()
 
@@ -68,11 +69,13 @@ class TravelLocationsMapViewController: UIViewController {
         }
         
         let touchedPosition = sender.locationInView(mapView)
-        let mapCoordinate = mapView.convertPoint(touchedPosition, toCoordinateSpace: mapView)
+//        let mapCoordinate = mapView.convertPoint(touchedPosition, toCoordinateSpace: mapView)
+        let mapCoordinate = mapView.convertPoint(touchedPosition, toCoordinateFromView: mapView)
         
         switch sender.state {
         case .Began:
-//            droppedPin =
+            droppedPin = Pin(latitude: mapCoordinate.latitude, longitude: mapCoordinate.longitude, title: "", context: coreDataStack.context)
+            mapView.addAnnotation(droppedPin)
             break
         
         case .Changed:
@@ -80,7 +83,7 @@ class TravelLocationsMapViewController: UIViewController {
             break
         
         case .Ended, .Cancelled:
-            
+            coreDataStack.save()
             break
             
         default:
@@ -128,7 +131,7 @@ class TravelLocationsMapViewController: UIViewController {
     
     func addPinsToMap(pins: [Pin]) {
         for pin in pins {
-//            mapView.addAnnotation(Pin)
+            mapView.addAnnotation(pin)
         }
     }
     
@@ -148,8 +151,25 @@ extension TravelLocationsMapViewController: MKMapViewDelegate {
         userDefaults.synchronize()
     }
     
-    func mapView(mapView: MKMapView, didAddAnnotationViews views: [MKAnnotationView]) {
-        fatalError("Not Implemented")
+//    func mapView(mapView: MKMapView, didAddAnnotationViews views: [MKAnnotationView]) {
+//        fatalError("Not Implemented")
+//    }
+    
+    func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
+        
+        var pinView = mapView.dequeueReusableAnnotationViewWithIdentifier(Constants.MapReuseId) as? MKPinAnnotationView
+        
+        if pinView == nil {
+            pinView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: Constants.MapReuseId)
+            pinView?.canShowCallout = false
+            pinView?.pinTintColor = Constants.ColorPalette.UdacityBlue
+        } else {
+            pinView?.annotation = annotation
+        }
+        pinView?.draggable = true
+        pinView?.animatesDrop = true
+        
+        return pinView
     }
     
     func mapView(mapView: MKMapView, didSelectAnnotationView view: MKAnnotationView) {
