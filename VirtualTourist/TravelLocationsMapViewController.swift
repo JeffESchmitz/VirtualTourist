@@ -69,7 +69,6 @@ class TravelLocationsMapViewController: UIViewController {
         }
         
         let touchedPosition = sender.locationInView(mapView)
-//        let mapCoordinate = mapView.convertPoint(touchedPosition, toCoordinateSpace: mapView)
         let mapCoordinate = mapView.convertPoint(touchedPosition, toCoordinateFromView: mapView)
         
         switch sender.state {
@@ -79,7 +78,7 @@ class TravelLocationsMapViewController: UIViewController {
             break
         
         case .Changed:
-            
+            droppedPin.coordinate = mapCoordinate
             break
         
         case .Ended, .Cancelled:

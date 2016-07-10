@@ -34,6 +34,19 @@ class Pin: NSManagedObject {
 extension Pin: MKAnnotation {
     
     var coordinate: CLLocationCoordinate2D {
-        return CLLocationCoordinate2DMake(latitude as! CLLocationDegrees, longitude as! CLLocationDegrees)
+        
+        get {
+          return CLLocationCoordinate2DMake(latitude as! CLLocationDegrees, longitude as! CLLocationDegrees)
+        }
+        
+        set {
+            willChangeValueForKey("coordinate")
+
+            self.latitude = newValue.latitude
+            self.longitude = newValue.longitude
+            
+            didChangeValueForKey("coordinate")
+        }
     }
+
 }
