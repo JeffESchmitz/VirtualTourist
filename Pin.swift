@@ -12,10 +12,10 @@ import MapKit
 
 class Pin: NSManagedObject {
 
-    convenience init(latitude: Double, longitude: Double, title: String, pageNumber: Int = 1, insertIntoManagedObjectContext context: NSManagedObjectContext) {
+    convenience init(latitude: Double, longitude: Double, title: String, pageNumber: Int = 1, context: NSManagedObjectContext) {
         
-        if let ent = NSEntityDescription.entityForName("Pin", inManagedObjectContext: context) {
-            self.init(entity: ent, insertIntoManagedObjectContext: context)
+        if let entity = NSEntityDescription.entityForName("Pin", inManagedObjectContext: context) {
+            self.init(entity: entity, insertIntoManagedObjectContext: context)
             
             self.latitude = latitude
             self.longitude = longitude
