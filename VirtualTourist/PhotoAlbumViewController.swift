@@ -59,7 +59,9 @@ class PhotoAlbumViewController: UIViewController {
     override func viewWillAppear(animated: Bool) {
         super.viewDidAppear(animated)
 
-        
+        if ((fetchedResultsController.fetchedObjects?.isEmpty) != nil) {
+            downloadPhotosFromFlickr()
+        }
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -102,6 +104,10 @@ class PhotoAlbumViewController: UIViewController {
         let region = MKCoordinateRegion(center: pin.coordinate, span: MKCoordinateSpanMake(1.0, 1.0))
         mapView.setRegion(region, animated: true)
         mapView.addAnnotation(pin)
+    }
+    
+    private func downloadPhotosFromFlickr() {
+        
     }
 
 }
@@ -172,15 +178,16 @@ extension PhotoAlbumViewController: UICollectionViewDataSource {
 }
 
 
-
 // MARK: - UICollectionViewDelegate
 extension PhotoAlbumViewController: UICollectionViewDelegate {
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        fatalError("Not Implemented Yet")
+        collectionView.cellForItemAtIndexPath(indexPath)!.alpha = 1.0
     }
     
-    
+    func collectionView(collectionView: UICollectionView, didDeselectItemAtIndexPath indexPath: NSIndexPath) {
+        collectionView.cellForItemAtIndexPath(indexPath)!.alpha = 1.0
+    }
 }
 
 
