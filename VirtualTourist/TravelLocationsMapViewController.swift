@@ -11,6 +11,7 @@ import CoreData
 
 class TravelLocationsMapViewController: UIViewController {
     
+    // MARK: - Outlets
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var deletePinsLabel: UILabel!
     
@@ -20,7 +21,7 @@ class TravelLocationsMapViewController: UIViewController {
     private lazy var fetchedResultsController: NSFetchedResultsController = {
         
         // Create a fetch request
-        let fetchRequest = NSFetchRequest(entityName: "Pin")
+        let fetchRequest = NSFetchRequest(entityName: Constants.Entity.Pin)
         
         // Sort the pins by latitude
         fetchRequest.sortDescriptors = [NSSortDescriptor(key: Constants.Latitude, ascending: true)]
