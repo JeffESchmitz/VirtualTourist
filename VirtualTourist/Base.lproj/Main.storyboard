@@ -139,6 +139,10 @@
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
+                                <connections>
+                                    <outlet property="dataSource" destination="MQT-gH-39y" id="8st-oi-8JI"/>
+                                    <outlet property="delegate" destination="MQT-gH-39y" id="SlR-us-XJE"/>
+                                </connections>
                             </collectionView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No Images for this Pin" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7JU-dW-Gvg">
                                 <rect key="frame" x="186" y="287" width="228" height="29"/>
@@ -186,6 +190,12 @@
                             </mask>
                         </variation>
                     </view>
+                    <connections>
+                        <outlet property="collectionView" destination="EHK-2k-JRA" id="0RN-Xy-wB2"/>
+                        <outlet property="mapView" destination="ClX-42-Y2e" id="Jiq-QD-7sn"/>
+                        <outlet property="noImagesLabel" destination="7JU-dW-Gvg" id="42o-C8-UQf"/>
+                        <outlet property="refreshRemoveButton" destination="xj2-Uf-qb7" id="67Z-aS-YLm"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ttB-DX-mfi" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

@@ -57,3 +57,14 @@ struct Constants {
     
 }
 
+extension FlickrClient {
+    
+    // MARK: Components
+    
+    struct Components {
+        static let scheme = "https"
+        static let host = "api.flickr.com"
+        static let path = "/services/rest"
+    }
+}
+

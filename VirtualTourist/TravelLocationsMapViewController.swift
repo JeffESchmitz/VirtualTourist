@@ -31,12 +31,11 @@ class TravelLocationsMapViewController: UIViewController {
                                                                   managedObjectContext: stackContext,
                                                                   sectionNameKeyPath: nil,
                                                                   cacheName: nil)
-        
         return fetchedResultsController
     }()
     
     
-    // MARK: - UIViewController
+    // MARK: - UIViewController Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
