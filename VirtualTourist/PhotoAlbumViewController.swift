@@ -31,8 +31,9 @@ class PhotoAlbumViewController: UIViewController {
         fetchRequest.sortDescriptors = [NSSortDescriptor(key: Constants.Entity.Title, ascending: true)]
         fetchRequest.predicate = NSPredicate(format: "pin == %@", self.pin)
         
+        let stackContext = (UIApplication.sharedApplication().delegate as! AppDelegate).coreDataStack.context
         let fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest,
-                                                                  managedObjectContext: self.coreDataStack.context,
+                                                                  managedObjectContext: stackContext,
                                                                   sectionNameKeyPath: nil,
                                                                   cacheName: nil)
         return fetchedResultsController
@@ -149,15 +150,24 @@ extension PhotoAlbumViewController: NSFetchedResultsControllerDelegate {
 extension PhotoAlbumViewController: UICollectionViewDataSource {
 
     func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
-        return 0
+        return fetchedResultsController.sections?.count ?? 0
     }
 
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 1
+        return fetchedResultsController.sections![section].numberOfObjects
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        return PhotoCollectionViewCell()
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(PhotoCollectionViewCell.identifier, forIndexPath: indexPath) as! PhotoCollectionViewCell
+        
+        let photo = fetchedResultsController.objectAtIndexPath(indexPath) as! Photo
+        
+        cell.updateCell(photo)
+        
+        cell.alpha = (cell.selected) ? 0.5 : 1.0
+        
+        return cell
+        
     }
 }
 
@@ -172,3 +182,21 @@ extension PhotoAlbumViewController: UICollectionViewDelegate {
     
     
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
