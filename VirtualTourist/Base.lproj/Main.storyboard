@@ -150,6 +150,9 @@
                                 <color key="textColor" red="0.0078431372550000003" green="0.70196078429999997" blue="0.89411764709999997" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="g8X-Y8-Vtr">
+                                <rect key="frame" x="290" y="290" width="20" height="20"/>
+                            </activityIndicatorView>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lvn-if-8aL">
                                 <rect key="frame" x="0.0" y="556" width="600" height="44"/>
                                 <constraints>
@@ -171,9 +174,11 @@
                             <constraint firstItem="EHK-2k-JRA" firstAttribute="leading" secondItem="lvn-if-8aL" secondAttribute="leading" id="L0u-eG-UAK"/>
                             <constraint firstAttribute="trailingMargin" secondItem="lvn-if-8aL" secondAttribute="trailing" constant="-20" id="TvE-hy-Mcy"/>
                             <constraint firstItem="EHK-2k-JRA" firstAttribute="top" secondItem="ycy-gv-pBn" secondAttribute="bottom" constant="150" id="Uto-JY-kz1"/>
+                            <constraint firstItem="g8X-Y8-Vtr" firstAttribute="centerY" secondItem="Ehq-Ia-ewL" secondAttribute="centerY" id="VwD-W1-viq"/>
                             <constraint firstItem="lvn-if-8aL" firstAttribute="top" secondItem="EHK-2k-JRA" secondAttribute="bottom" constant="2" id="WFn-FZ-1Dp"/>
                             <constraint firstItem="ClX-42-Y2e" firstAttribute="top" secondItem="ycy-gv-pBn" secondAttribute="bottom" id="X3x-ci-FRs"/>
                             <constraint firstItem="EHK-2k-JRA" firstAttribute="trailing" secondItem="lvn-if-8aL" secondAttribute="trailing" id="c2Z-dH-UBS"/>
+                            <constraint firstItem="g8X-Y8-Vtr" firstAttribute="centerX" secondItem="Ehq-Ia-ewL" secondAttribute="centerX" id="ivc-0G-PYT"/>
                             <constraint firstItem="EHK-2k-JRA" firstAttribute="top" secondItem="ycy-gv-pBn" secondAttribute="bottom" constant="126" id="osT-tR-gQm"/>
                             <constraint firstItem="EHK-2k-JRA" firstAttribute="leading" secondItem="lvn-if-8aL" secondAttribute="leading" id="ssd-2R-0HV"/>
                             <constraint firstItem="7JU-dW-Gvg" firstAttribute="centerY" secondItem="Ehq-Ia-ewL" secondAttribute="centerY" constant="1" id="vdm-ec-yqQ"/>
@@ -191,6 +196,7 @@
                         </variation>
                     </view>
                     <connections>
+                        <outlet property="activityIndicator" destination="g8X-Y8-Vtr" id="UK9-Lm-hwE"/>
                         <outlet property="collectionView" destination="EHK-2k-JRA" id="0RN-Xy-wB2"/>
                         <outlet property="mapView" destination="ClX-42-Y2e" id="Jiq-QD-7sn"/>
                         <outlet property="noImagesLabel" destination="7JU-dW-Gvg" id="42o-C8-UQf"/>
