@@ -29,15 +29,19 @@ class PhotoAlbumViewController: UIViewController {
         
         // Sort the pins by latitude
         fetchRequest.sortDescriptors = [NSSortDescriptor(key: Constants.Entity.Title, ascending: true)]
+        fetchRequest.predicate = NSPredicate(format: "pin == %@", self.pin)
         
-        let stackContext = (UIApplication.sharedApplication().delegate as! AppDelegate).coreDataStack.context
         let fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest,
-                                                                  managedObjectContext: stackContext,
+                                                                  managedObjectContext: self.coreDataStack.context,
                                                                   sectionNameKeyPath: nil,
                                                                   cacheName: nil)
         return fetchedResultsController
     }()
-    
+    // For CoreData to keep track of insertions and deletions
+    private var insertedIndexPaths: [NSIndexPath]!
+    private var deletedIndexPaths: [NSIndexPath]!
+    private var updatedIndexPaths: [NSIndexPath]!
+
     
     // MARK: - UIViewController Lifecycle
     override func viewDidLoad() {
@@ -49,6 +53,12 @@ class PhotoAlbumViewController: UIViewController {
         coreDataStack = (UIApplication.sharedApplication().delegate as! AppDelegate).coreDataStack
 
         fetchPhotos()
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+
+        
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -64,6 +74,8 @@ class PhotoAlbumViewController: UIViewController {
     // MARK: - Class functions
     private func initializeView() {
         
+        fetchedResultsController.delegate = self
+
         automaticallyAdjustsScrollViewInsets = false
         
         initializeMap()
@@ -94,7 +106,43 @@ class PhotoAlbumViewController: UIViewController {
 }
 
 // MARK: - NSFetchedResultsControllerDelegate
-
+extension PhotoAlbumViewController: NSFetchedResultsControllerDelegate {
+    
+    func controllerWillChangeContent(controller: NSFetchedResultsController) {
+        insertedIndexPaths = [NSIndexPath]()
+        deletedIndexPaths = [NSIndexPath]()
+        updatedIndexPaths = [NSIndexPath]()
+        
+    }
+    
+    func controller(controller: NSFetchedResultsController, didChangeObject anObject: AnyObject, atIndexPath indexPath: NSIndexPath?, forChangeType type: NSFetchedResultsChangeType, newIndexPath: NSIndexPath?) {
+        
+        switch type {
+        case .Insert:
+            insertedIndexPaths.append(newIndexPath!)
+            break
+        
+        case .Delete:
+            deletedIndexPaths.append(indexPath!)
+            break
+            
+        case .Update:
+            updatedIndexPaths.append(indexPath!)
+            break
+            
+        default:
+            break
+        }
+    }
+    
+    func controllerDidChangeContent(controller: NSFetchedResultsController) {
+        collectionView.performBatchUpdates({ 
+            self.collectionView.deleteItemsAtIndexPaths(self.deletedIndexPaths)
+            self.collectionView.insertItemsAtIndexPaths(self.insertedIndexPaths)
+            self.collectionView.reloadItemsAtIndexPaths(self.updatedIndexPaths)
+            }, completion: nil)
+    }
+}
 
 
 // MARK: - UICollectionViewDataSource

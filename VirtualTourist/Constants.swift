@@ -55,8 +55,10 @@ struct Constants {
     
     struct FlickrParameterValues {
         
-        static let Method           = "flickr.photos.search"
-        static let APIKey           = "4120b4b57e0c20e206965d809d8d59e4"
+        static let Method                       = "flickr.photos.search"
+        static let APIKey_Somewhere_Else        = "4120b4b57e0c20e206965d809d8d59e4"
+        static let APIKey_jeffschmitz           = "f1aeaeb551dde21a0cecb995ea5ac07f"
+        
         static let ResponseFormat   = "json"
 
     }
