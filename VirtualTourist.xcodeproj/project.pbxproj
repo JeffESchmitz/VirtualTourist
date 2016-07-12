@@ -24,6 +24,7 @@
 		95D198BE1D2DB95200380496 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 95D198BC1D2DB95200380496 /* Main.storyboard */; };
 		95D198C01D2DB95200380496 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 95D198BF1D2DB95200380496 /* Assets.xcassets */; };
 		95D198C31D2DB95200380496 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 95D198C11D2DB95200380496 /* LaunchScreen.storyboard */; };
+		95E7F28E1D344E84008B40C6 /* Client.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95E7F28D1D344E84008B40C6 /* Client.swift */; };
 		95F7E8FF1D305DF700AA413B /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95F7E8FE1D305DF700AA413B /* CoreDataStack.swift */; };
 		95F7E9011D30662A00AA413B /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95F7E9001D30662A00AA413B /* Constants.swift */; };
 		95F7E9021D30662A00AA413B /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95F7E9001D30662A00AA413B /* Constants.swift */; };
@@ -60,6 +61,7 @@
 		95D198BF1D2DB95200380496 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		95D198C21D2DB95200380496 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		95D198C41D2DB95200380496 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		95E7F28D1D344E84008B40C6 /* Client.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Client.swift; sourceTree = "<group>"; };
 		95F7E8FE1D305DF700AA413B /* CoreDataStack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 		95F7E9001D30662A00AA413B /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		95F7E9031D31AF3900AA413B /* UIViewController+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extensions.swift"; sourceTree = "<group>"; };
@@ -99,6 +101,7 @@
 			isa = PBXGroup;
 			children = (
 				958A54B91D331A5B00DC8509 /* FlickrClient.swift */,
+				95E7F28D1D344E84008B40C6 /* Client.swift */,
 			);
 			name = Client;
 			sourceTree = "<group>";
@@ -296,6 +299,7 @@
 				958A54BA1D331A5B00DC8509 /* FlickrClient.swift in Sources */,
 				958A54B71D330F1A00DC8509 /* PhotoCollectionViewCell.swift in Sources */,
 				95D198B91D2DB95200380496 /* AppDelegate.swift in Sources */,
+				95E7F28E1D344E84008B40C6 /* Client.swift in Sources */,
 				95868B031D2FDDE8001F4950 /* Photo+CoreDataProperties.swift in Sources */,
 				95868AFE1D2FD0F7001F4950 /* VirtualTourist.xcdatamodeld in Sources */,
 				95868B041D2FDDE8001F4950 /* Photo.swift in Sources */,

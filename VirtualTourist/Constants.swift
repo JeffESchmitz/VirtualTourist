@@ -66,14 +66,37 @@ struct Constants {
     
 }
 
-extension FlickrClient {
+extension Client {
     
+    
+    struct HttpRequest {
+        static let MethodPOST               = "POST"
+        static let MethodGET                = "GET"
+        static let AcceptHeaderField        = "Accept"
+        static let ContentTypeHeaderField   = "Content-Type"
+        static let ContentJSON              = "application/json"
+        
+        static let MethodDELETE             = "DELETE"
+        static let CookieName               = "XSRF-TOKEN"
+        static let XSRFHeaderField          = "X-XSRF-TOKEN"
+        
+    }
+
     // MARK: Components
     
     struct Components {
         static let scheme = "https"
         static let host = "api.flickr.com"
         static let path = "/services/rest"
+    }
+    
+    struct Errors {
+        static let domain                   = "APISession"
+        static let unsuccessfulResponse     = "Unsuccessful response."
+        static let noData                   = "No Data Returned from Request."
+        static let noDataCode               = 1000
+        static let unableToConverData       = "Could not parse the data as JSON"
+        static let unableToConverDataCode   = 1001
     }
 }
 

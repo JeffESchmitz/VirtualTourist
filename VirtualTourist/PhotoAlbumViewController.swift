@@ -108,7 +108,9 @@ class PhotoAlbumViewController: UIViewController {
     
     private func downloadPhotosFromFlickr() {
         
+        refreshRemoveButton.enabled = false
         toggleActivityIndicator(false)
+        
         
         
     }

@@ -8,6 +8,6 @@
 
 import Foundation
 
-class FlickrClient {
-
+extension Client {
+    
 }
