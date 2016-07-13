@@ -14,7 +14,7 @@ class Pin: NSManagedObject {
 
     convenience init(latitude: Double, longitude: Double, title: String, subtitle: String = "", pageNumber: Int = 1, context: NSManagedObjectContext) {
         
-        if let entity = NSEntityDescription.entityForName("Pin", inManagedObjectContext: context) {
+        if let entity = NSEntityDescription.entityForName(Constants.Entity.Pin, inManagedObjectContext: context) {
             self.init(entity: entity, insertIntoManagedObjectContext: context)
             
             self.latitude   = latitude
@@ -23,8 +23,9 @@ class Pin: NSManagedObject {
             self.subtitle   = subtitle
             self.pageNumber = pageNumber
             
-        } else {
-            fatalError("Unable to find entity 'Pin'")
+        }
+        else {
+            fatalError("Unable to find entity: Pin")
         }
     }
 

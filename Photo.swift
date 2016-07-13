@@ -8,10 +8,40 @@
 
 import Foundation
 import CoreData
-
+import UIKit
 
 class Photo: NSManagedObject {
 
-// Insert code here to add functionality to your managed object subclass
+    convenience init(imageUrl: String, context: NSManagedObjectContext) {
+        if let entity = NSEntityDescription.entityForName(Constants.Entity.Photo, inManagedObjectContext: context) {
+            self.init(entity: entity, insertIntoManagedObjectContext: context)
+            
+            self.url = imageUrl
+            self.image = nil
+        }
+        else {
+            fatalError("Unable to find entity: Photo")
+        }
+    }
 
+//    convenience init(imageUrl: String, context: NSManagedObjectContext) {
+//        if let entity = NSEntityDescription.entityForName(Constants.Entity.Photo, inManagedObjectContext: context) {
+//            self.init(entity: entity, insertIntoManagedObjectContext: context)
+//            
+//            self.url = imageUrl
+//            self.image = nil
+//        }
+//        else {
+//            fatalError("Unable to find entity: Photo")
+//        }
+//    }
+
+//    var image: UIImage? {
+//        get {
+//            if let imageData = imageData {
+//                return UIImage(data: self.imageData)
+//            }
+//        }
+//    }
+    
 }
