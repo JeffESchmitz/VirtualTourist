@@ -12,36 +12,31 @@ import UIKit
 
 class Photo: NSManagedObject {
 
-    convenience init(imageUrl: String, context: NSManagedObjectContext) {
+    convenience init(title: String = "", imageUrl: String, image: UIImage? = nil, pin: Pin, context: NSManagedObjectContext) {
         if let entity = NSEntityDescription.entityForName(Constants.Entity.Photo, inManagedObjectContext: context) {
             self.init(entity: entity, insertIntoManagedObjectContext: context)
             
-            self.url = imageUrl
-            self.image = nil
+            self.title = title
+            self.imageUrl = imageUrl
+            if let image = image {
+                self.imageData = UIImagePNGRepresentation(image)
+            }
+            self.pin = pin
         }
         else {
             fatalError("Unable to find entity: Photo")
         }
     }
 
-//    convenience init(imageUrl: String, context: NSManagedObjectContext) {
-//        if let entity = NSEntityDescription.entityForName(Constants.Entity.Photo, inManagedObjectContext: context) {
-//            self.init(entity: entity, insertIntoManagedObjectContext: context)
-//            
-//            self.url = imageUrl
-//            self.image = nil
-//        }
-//        else {
-//            fatalError("Unable to find entity: Photo")
-//        }
-//    }
-
-//    var image: UIImage? {
-//        get {
-//            if let imageData = imageData {
-//                return UIImage(data: self.imageData)
-//            }
-//        }
-//    }
     
+    var image: UIImage? {
+        get {
+            if let imageData = imageData {
+                return UIImage(data: imageData)
+            }
+            else {
+                return nil
+            }
+        }
+    }
 }

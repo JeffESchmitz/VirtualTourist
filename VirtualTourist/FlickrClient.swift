@@ -7,6 +7,8 @@
 //
 
 import Foundation
+import CoreData
+import UIKit
 
 extension Client {
     
@@ -44,14 +46,81 @@ extension Client {
             }
             
             // Get them-there photos y'all
+            guard let result = result,
+                photosDictionary = result[FlickrResponseKeys.PhotosDictionary] as? [String: AnyObject],
+                photoArray = photosDictionary[FlickrResponseKeys.PhotoArray] as? [[String: AnyObject]],
+                numberOfPhotoPages = photosDictionary[FlickrResponseKeys.Pages] else {
+                    completionHandler(result: nil, error: "Unable to download photos. Check Pin location or network connection")
+                    return
+            }
             
+            pin.pageNumber = numberOfPhotoPages as! NSNumber
+
+            
+            for photoDictionary in photoArray {
+                guard let urlString = photosDictionary[FlickrResponseKeys.MediumURL] as? String else {
+                    print("Unable to locate photo URL")
+                    continue
+                }
+                
+                let photo = Photo(imageUrl: urlString, pin: pin, context: self.coreDataStack.context)
+                
+                self.downloadImage(forPhoto: photo, completionHandler: { (success, error) in
+                    
+                    if success {
+                        dispatch_async(dispatch_get_main_queue(), { 
+                            self.coreDataStack.save()
+                        })
+                    }
+                })
+            }
         }
     }
     
-    
-//    var randomPageNumber: Int {
-//        get {
-//            if let totalPages =
-//        }
-//    }
+    func downloadImage(forPhoto photo: Photo, completionHandler: (success: Bool, error: NSError?) -> Void) {
+        
+        guard let imageUrl = photo.imageUrl else {
+            print("No URL for photo: \(photo)")
+            return
+        }
+        
+        taskForGETMethodWithURLString(imageUrl) { (result, error) in
+            if let error = error {
+                print("Error getting image for photo. error: \(error.localizedDescription)")
+                completionHandler(success: false, error: error)
+            } else {
+                
+                if let result = result {
+                    let image = UIImage(data: result as! NSData)
+                    
+                    // DEBUGGING: Save the file to disk to check if image was correct
+                    let fileName = (imageUrl as NSString).lastPathComponent
+                    let dirPath = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0]
+                    let pathArray = [dirPath, fileName]
+                    let fileURL = NSURL.fileURLWithPathComponents(pathArray)!
+                    print(fileURL)
+                    // Save file
+                    NSFileManager.defaultManager().createFileAtPath(fileURL.path!, contents: result as! NSData, attributes: nil)
+                    // END DEBUGGING
+                    
+                    photo.imageData = result as! NSData
+                    
+                    completionHandler(success: true, error: nil)
+                }
+                
+            }
+            
+        }
+    }
+
 }
+
+
+
+
+
+
+
+
+
+

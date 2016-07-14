@@ -7,15 +7,18 @@
 //
 
 import Foundation
+import CoreData
+import UIKit
 
 class Client {
     
     static let sharedInstance = Client()
     var session: NSURLSession
+    let coreDataStack: CoreDataStack
     
     private init() {
         session = NSURLSession.sharedSession()
-        
+        coreDataStack = (UIApplication.sharedApplication().delegate as! AppDelegate).coreDataStack
     }
     
 //    func taskForGETMethod(url: NSURL, headers: [String:String]? = nil,

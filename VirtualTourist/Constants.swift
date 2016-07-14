@@ -27,13 +27,10 @@ struct Constants {
     }
     
     struct Entity {
-        static let Pin      = "Pin"
-        static let Photo    = "Photo"
-        static let Title    = "title"
+        static let Pin              = "Pin"
+        static let Photo            = "Photo"
+        static let Title            = "title"
     }
-    
-
-
     
 }
 
@@ -53,9 +50,9 @@ extension Client {
     }
     
     struct Components {
-        static let scheme = "https"
-        static let host = "api.flickr.com"
-        static let path = "/services/rest"
+        static let scheme                   = "https"
+        static let host                     = "api.flickr.com"
+        static let path                     = "/services/rest"
     }
     
     struct Errors {
@@ -92,6 +89,21 @@ extension Client {
         static let Extras                   = "url_c"
         static let PerPage                  = "21"
         
+    }
+    
+    struct FlickrResponseKeys {
+        static let Status           = "stat"
+        static let Code             = "code"
+        static let Message          = "message"
+        static let PhotosDictionary = "photos"
+        static let PhotoArray       = "photo"
+        static let Pages            = "pages"
+        static let MediumURL        = "url_m"
+    }
+    
+    struct FlickrResponseValues {
+        static let Ok               = "ok"
+        static let Fail             = "fail"
     }
 }
 

@@ -24,7 +24,7 @@ class PhotoCollectionViewCell: UICollectionViewCell {
     func updateCell(photo: Photo?) {
         
         if let photoImage = photo?.image {
-            cellImageView.image = UIImage(data: photoImage)
+            cellImageView.image = photoImage
         }
         else {
             cellImageView.image = UIImage(named: "placeHolder")
@@ -33,8 +33,6 @@ class PhotoCollectionViewCell: UICollectionViewCell {
             
             // TODO: Add the Flickr client loading of images here...
         }
-        
-        
     }
     
     // From the old iOS Persistence (step 5.5) to cancel the previous task when a value is set
