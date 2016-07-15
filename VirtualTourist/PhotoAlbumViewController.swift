@@ -193,7 +193,7 @@ extension PhotoAlbumViewController: UICollectionViewDataSource {
 extension PhotoAlbumViewController: UICollectionViewDelegate {
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        collectionView.cellForItemAtIndexPath(indexPath)!.alpha = 1.0
+        collectionView.cellForItemAtIndexPath(indexPath)!.alpha = 0.5
     }
     
     func collectionView(collectionView: UICollectionView, didDeselectItemAtIndexPath indexPath: NSIndexPath) {
