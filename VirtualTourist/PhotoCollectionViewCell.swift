@@ -17,8 +17,11 @@ class PhotoCollectionViewCell: UICollectionViewCell {
     override func prepareForReuse() {
         super.prepareForReuse()
         
-        cellImageView = nil
-        activityIndicatorView.stopAnimating()
+//        cellImageView = nil
+//        activityIndicatorView.stopAnimating()
+        if cellImageView.image == nil {
+            activityIndicatorView.startAnimating()
+        }
     }
     
     func updateCell(photo: Photo?) {

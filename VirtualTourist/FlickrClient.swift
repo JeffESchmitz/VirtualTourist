@@ -25,12 +25,11 @@ extension Client {
         
         let requestParameters: [String : AnyObject] = [
             FlickrParameterKeys.Method          : FlickrParameterValues.Method,
-            FlickrParameterKeys.Method          : FlickrParameterValues.Method,
             FlickrParameterKeys.APIKey          : FlickrParameterValues.APIKey,
             FlickrParameterKeys.Format          : FlickrParameterValues.Format,
             FlickrParameterKeys.NoJsonCallback  : FlickrParameterValues.NoJsonCallback,
             FlickrParameterKeys.SafeSearch      : FlickrParameterValues.SafeSearch,
-            FlickrParameterKeys.Extras          : FlickrParameterValues.Extras,
+            FlickrParameterKeys.Extras          : FlickrParameterValues.ExtrasMediumURL,
             FlickrParameterKeys.Page            : randomPage,
             FlickrParameterKeys.PerPage         : FlickrParameterValues.PerPage,
             FlickrParameterKeys.Latitude        : Double(pin.latitude!),
@@ -56,9 +55,8 @@ extension Client {
             
             pin.pageNumber = numberOfPhotoPages as! NSNumber
 
-            
             for photoDictionary in photoArray {
-                guard let urlString = photosDictionary[FlickrResponseKeys.MediumURL] as? String else {
+                guard let urlString = photoDictionary[FlickrResponseKeys.MediumURL] as? String else {
                     print("Unable to locate photo URL")
                     continue
                 }

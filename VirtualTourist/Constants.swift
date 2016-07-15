@@ -86,7 +86,8 @@ extension Client {
         static let Format                   = "json"
         static let NoJsonCallback           = "1"
         static let SafeSearch               = "1"
-        static let Extras                   = "url_c"
+//        static let Extras                   = "url_c"
+        static let ExtrasMediumURL          = "url_m"
         static let PerPage                  = "21"
         
     }

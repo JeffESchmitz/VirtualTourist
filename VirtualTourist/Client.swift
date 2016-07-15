@@ -90,7 +90,7 @@ class Client {
     func taskForGETMethodWithURLString(urlString: String,
                                        completionHandler: (result: AnyObject!, error: NSError?) -> Void) {
 
-        guard urlString.isEmpty else {
+        guard !urlString.isEmpty else {
             print("urlString is empty")
             return
         }
@@ -102,11 +102,9 @@ class Client {
         taskForGetInternal(request, completionHandler: completionHandler)
     }
     
-    
     private func taskForGetInternal(request: NSMutableURLRequest,
                                     parseJSON: Bool = false,
                                     completionHandler: (result: AnyObject!, error: NSError?) -> Void) {
-        
      
         // Generate the task
         let task = session.dataTaskWithRequest(request) { (data, response, error) in

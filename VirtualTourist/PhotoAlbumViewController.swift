@@ -173,11 +173,13 @@ extension PhotoAlbumViewController: UICollectionViewDataSource {
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(PhotoCollectionViewCell.identifier, forIndexPath: indexPath) as! PhotoCollectionViewCell
+        let Id = PhotoCollectionViewCell.identifier
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(Id, forIndexPath: indexPath) as! PhotoCollectionViewCell
         
         let photo = fetchedResultsController.objectAtIndexPath(indexPath) as! Photo
         
         cell.updateCell(photo)
+//        cell.cellImageView.image = photo.image
         
         cell.alpha = (cell.selected) ? 0.5 : 1.0
         

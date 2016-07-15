@@ -90,6 +90,11 @@ class TravelLocationsMapViewController: UIViewController {
         case .Began:
             droppedPin = Pin(latitude: mapCoordinate.latitude, longitude: mapCoordinate.longitude, title: "", context: coreDataStack.context)
             mapView.addAnnotation(droppedPin)
+            
+            // Download photos for a new pin
+            Client.sharedInstance.downloadPhotos(forPin: droppedPin, completionHandler: { (result, error) in
+                NSLog("Client downloaded photos for pin: %d", result == nil ? true : false)
+            })
             break
         
         case .Changed:
