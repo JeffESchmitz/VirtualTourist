@@ -157,7 +157,11 @@
                                 </constraints>
                                 <items>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="FSQ-rV-CUV"/>
-                                    <barButtonItem title="New Collection" id="xj2-Uf-qb7"/>
+                                    <barButtonItem title="New Collection" id="xj2-Uf-qb7">
+                                        <connections>
+                                            <action selector="refreshRemoveButtonTouched:" destination="MQT-gH-39y" id="Jlw-1X-opZ"/>
+                                        </connections>
+                                    </barButtonItem>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="HPr-gt-fLr"/>
                                 </items>
                             </toolbar>

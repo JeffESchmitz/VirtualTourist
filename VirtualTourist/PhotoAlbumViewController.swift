@@ -84,6 +84,54 @@ class PhotoAlbumViewController: UIViewController {
     
     // MARK: - Actions
     
+    @IBAction func refreshRemoveButtonTouched(sender: AnyObject) {
+        
+        // For purposes of this app (and view), editing is equivilant to "mark for delete" mode.
+        if editing == true {
+        }
+            // Non-editing (editing == false), is image selection mode. Image selection navigates to ImageDetail view.
+        else {
+            
+        }
+        
+        
+        refreshRemoveButton.enabled = false
+        
+        // Delete all photos
+        if let photos = fetchedResultsController.fetchedObjects as? [Photo] {
+            
+            for photo in photos {
+                coreDataStack.context.deleteObject(photo)
+            }
+            coreDataStack.save()
+        }
+        
+        // Get a new collection of photos
+        Client.sharedInstance.downloadPhotos(forPin: pin, completionHandler: { (result, error) in
+            NSLog("Client downloaded photos for pin: %d", result == nil ? true : false)
+            guard result == nil else {
+                self.displayMessage(error, title: "Refresh Error")
+                return
+            }
+            
+//            dispatch_async(dispatch_get_main_queue(), {
+//                do {
+//                    try self.fetchedResultsController.performFetch()
+//                } catch let error as NSError {
+//                    self.displayMessage(error.localizedDescription, title: "Fetch Error")
+//                }
+//                
+//                self.collectionView.reloadData()
+//                self.refreshRemoveButton.enabled = true
+//            })
+        })
+        
+//        refreshRemoveButton.enabled = true
+//            defer {
+//                refreshRemoveButton.enabled = true
+//            }
+
+    }
     
     // MARK: - Class functions
     private func initializeView() {

@@ -91,26 +91,23 @@ extension Client {
                 if let result = result {
                     let image = UIImage(data: result as! NSData)
                     
-                    // DEBUGGING: Save the file to disk to check if image was correct
-                    let fileName = (imageUrl as NSString).lastPathComponent
-                    let dirPath = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0]
-                    let pathArray = [dirPath, fileName]
-                    let fileURL = NSURL.fileURLWithPathComponents(pathArray)!
-                    print(fileURL)
-                    // Save file
-                    NSFileManager.defaultManager().createFileAtPath(fileURL.path!, contents: result as! NSData, attributes: nil)
-                    // END DEBUGGING
+//                    // DEBUGGING: Save the file to disk to check if image was correct
+//                    let fileName = (imageUrl as NSString).lastPathComponent
+//                    let dirPath = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0]
+//                    let pathArray = [dirPath, fileName]
+//                    let fileURL = NSURL.fileURLWithPathComponents(pathArray)!
+//                    print(fileURL)
+//                    // Save file
+//                    NSFileManager.defaultManager().createFileAtPath(fileURL.path!, contents: result as! NSData, attributes: nil)
+//                    // END DEBUGGING
                     
                     photo.imageData = result as! NSData
                     
                     completionHandler(success: true, error: nil)
                 }
-                
             }
-            
         }
     }
-
 }
 
 
