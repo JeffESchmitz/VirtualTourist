@@ -17,7 +17,6 @@ class PhotoAlbumViewController: UIViewController {
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var noImagesLabel: UILabel!
     @IBOutlet weak var refreshRemoveButton: UIBarButtonItem!
-//    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     // MARK: - Properties
     var pin: Pin!
@@ -45,6 +44,7 @@ class PhotoAlbumViewController: UIViewController {
     private var updatedIndexPaths: [NSIndexPath]!
 
     
+    
     // MARK: - UIViewController Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -71,6 +71,17 @@ class PhotoAlbumViewController: UIViewController {
         collectionView.layoutIfNeeded()
         refreshRemoveButton.enabled = true
     }
+    
+    override func setEditing(editing: Bool, animated: Bool) {
+        super.setEditing(editing, animated: animated)
+        
+        if editing == true {
+            refreshRemoveButton.title = "Tap photos to delete"
+        } else {
+            refreshRemoveButton.title = "New Collection"
+        }
+    }
+    
     // MARK: - Actions
     
     
@@ -80,10 +91,11 @@ class PhotoAlbumViewController: UIViewController {
         fetchedResultsController.delegate = self
 
         automaticallyAdjustsScrollViewInsets = false
+        navigationItem.rightBarButtonItem = editButtonItem()
+        collectionView.allowsMultipleSelection = true
         
         initializeMap()
         
-        refreshRemoveButton.enabled = false
     }
     
     private func fetchPhotos() {
@@ -106,19 +118,13 @@ class PhotoAlbumViewController: UIViewController {
         mapView.addAnnotation(pin)
     }
     
+    // TODO: JES - 7.15.2016 - Not sure this is needed anymore, delete if not.
     private func downloadPhotosFromFlickr() {
         
-        refreshRemoveButton.enabled = false
-//        toggleActivityIndicator(false)
-        
-        
+//        refreshRemoveButton.enabled = false
         
     }
 
-//    private func toggleActivityIndicator(hidden: Bool) {
-//        (hidden) ? activityIndicator.stopAnimating() : activityIndicator.startAnimating()
-//        activityIndicator.hidden = hidden
-//    }
 }
 
 // MARK: - NSFetchedResultsControllerDelegate
@@ -169,7 +175,11 @@ extension PhotoAlbumViewController: UICollectionViewDataSource {
     }
 
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return fetchedResultsController.sections![section].numberOfObjects
+        let section = fetchedResultsController.sections![section]
+        
+        noImagesLabel.hidden = section.numberOfObjects > 0
+        
+        return section.numberOfObjects
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
@@ -179,7 +189,6 @@ extension PhotoAlbumViewController: UICollectionViewDataSource {
         let photo = fetchedResultsController.objectAtIndexPath(indexPath) as! Photo
         
         cell.updateCell(photo)
-//        cell.cellImageView.image = photo.image
         
         cell.alpha = (cell.selected) ? 0.5 : 1.0
         
