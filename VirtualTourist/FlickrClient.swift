@@ -72,6 +72,8 @@ extension Client {
                     }
                 })
             }
+            
+            completionHandler(result: true, error: nil)
         }
     }
     
