@@ -85,20 +85,19 @@ class PhotoAlbumViewController: UIViewController {
     }
     
     // MARK: - Actions
-    
     @IBAction func refreshRemoveButtonTouched(sender: AnyObject) {
         
         // For purposes of this app (and view), editing is equivilant to "mark for delete" mode.
         if editing == true {
+            deleteSelectedPhotos()
         }
         // Non-editing (editing == false), is image selection mode. Image selection navigates to ImageDetail view.
         else {
             refreshPhotoCollection()
         }
-        
     }
     
-    // MARK: - Class functions
+    // MARK: - Private (to class, and static) functions
     private func initializeView() {
         
         fetchedResultsController.delegate = self
@@ -139,6 +138,7 @@ class PhotoAlbumViewController: UIViewController {
     }
     
     private func refreshPhotoCollection() {
+        noImagesLabel.hidden = true
         refreshRemoveButton.enabled = false
         
         // Delete all photos
@@ -169,13 +169,26 @@ class PhotoAlbumViewController: UIViewController {
         })
     }
     
-    func toggleNoImagesLabel() {
+    private func toggleNoImagesLabel() {
         if let photos = self.pin.photos where photos.count == 0 {
             self.noImagesLabel.hidden = false
         }
     }
     
-
+    private func deleteSelectedPhotos() {
+        
+        guard let selectedItems = collectionView.indexPathsForSelectedItems() else {
+            displayMessage("Opps, something went wrong while trying to delete photos", title: "Huh?")
+            return
+        }
+        
+        for indexPath in selectedItems {
+            if let photo = self.fetchedResultsController.objectAtIndexPath(indexPath) as? Photo {
+                coreDataStack.context.deleteObject(photo)
+            }
+        }
+        coreDataStack.save()
+    }
 }
 
 // MARK: - NSFetchedResultsControllerDelegate
@@ -226,7 +239,7 @@ extension PhotoAlbumViewController: UICollectionViewDataSource {
     }
 
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        let section = fetchedResultsController.sections![section]        
+        let section = fetchedResultsController.sections![section]
         return section.numberOfObjects
     }
     
