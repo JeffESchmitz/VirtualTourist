@@ -17,24 +17,17 @@ class PhotoCollectionViewCell: UICollectionViewCell {
     override func prepareForReuse() {
         super.prepareForReuse()
         
-//        cellImageView = nil
-//        activityIndicatorView.stopAnimating()
-        if cellImageView.image == nil {
-            activityIndicatorView.startAnimating()
-        }
+        activityIndicatorView.startAnimating()
     }
     
     func updateCell(photo: Photo?) {
         
         if let photoImage = photo?.image {
             cellImageView.image = photoImage
+            activityIndicatorView.stopAnimating()
         }
         else {
             cellImageView.image = UIImage(named: "placeHolder")
-            activityIndicatorView.startAnimating()
-            activityIndicatorView.hidden = false
-            
-            // TODO: Add the Flickr client loading of images here...
         }
     }
     
