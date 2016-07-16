@@ -17,7 +17,7 @@ class PhotoAlbumViewController: UIViewController {
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var noImagesLabel: UILabel!
     @IBOutlet weak var refreshRemoveButton: UIBarButtonItem!
-    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+//    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     // MARK: - Properties
     var pin: Pin!
@@ -109,16 +109,16 @@ class PhotoAlbumViewController: UIViewController {
     private func downloadPhotosFromFlickr() {
         
         refreshRemoveButton.enabled = false
-        toggleActivityIndicator(false)
+//        toggleActivityIndicator(false)
         
         
         
     }
 
-    private func toggleActivityIndicator(hidden: Bool) {
-        (hidden) ? activityIndicator.stopAnimating() : activityIndicator.startAnimating()
-        activityIndicator.hidden = hidden
-    }
+//    private func toggleActivityIndicator(hidden: Bool) {
+//        (hidden) ? activityIndicator.stopAnimating() : activityIndicator.startAnimating()
+//        activityIndicator.hidden = hidden
+//    }
 }
 
 // MARK: - NSFetchedResultsControllerDelegate
