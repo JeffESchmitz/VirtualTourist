@@ -55,6 +55,8 @@ class PhotoAlbumViewController: UIViewController {
         coreDataStack = (UIApplication.sharedApplication().delegate as! AppDelegate).coreDataStack
 
         fetchPhotos()
+        
+        toggleNoImagesLabel()
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -94,34 +96,6 @@ class PhotoAlbumViewController: UIViewController {
             refreshPhotoCollection()
         }
         
-    }
-    
-    func refreshPhotoCollection() {
-        refreshRemoveButton.enabled = false
-        
-        // Delete all photos
-        if let photos = fetchedResultsController.fetchedObjects as? [Photo] {
-            
-            for photo in photos {
-                coreDataStack.context.deleteObject(photo)
-            }
-            coreDataStack.save()
-        }
-        
-        // Get a new collection of photos
-        Client.sharedInstance.downloadPhotos(forPin: pin, completionHandler: { (result, error) in
-            
-            guard let result = result
-                where result as! Bool == true else {
-                    print("Refresh error: \(error)")
-                    self.displayMessage(error, title: "Refresh Error")
-                    return
-            }
-            
-            dispatch_async(dispatch_get_main_queue(), {
-                self.refreshRemoveButton.enabled = true
-            })
-        })
     }
     
     // MARK: - Class functions
@@ -164,6 +138,42 @@ class PhotoAlbumViewController: UIViewController {
         
     }
     
+    private func refreshPhotoCollection() {
+        refreshRemoveButton.enabled = false
+        
+        // Delete all photos
+        if let photos = fetchedResultsController.fetchedObjects as? [Photo] {
+            
+            for photo in photos {
+                coreDataStack.context.deleteObject(photo)
+            }
+            coreDataStack.save()
+        }
+        
+        // Get a new collection of photos
+        Client.sharedInstance.downloadPhotos(forPin: pin, completionHandler: { (result, error) in
+            
+            guard let result = result
+                where result as! Bool == true else {
+                    print("Refresh error: \(error)")
+                    self.displayMessage(error, title: "Refresh Error")
+                    return
+            }
+            
+            // TODO: Consider adding a NSNotification to this class and the FlickrClient to communicate when all photo's are finished downloading instead of the completionHandler.
+            dispatch_async(dispatch_get_main_queue(), {
+                self.refreshRemoveButton.enabled = true
+                
+                self.toggleNoImagesLabel()
+            })
+        })
+    }
+    
+    func toggleNoImagesLabel() {
+        if let photos = self.pin.photos where photos.count == 0 {
+            self.noImagesLabel.hidden = false
+        }
+    }
     
 
 }
@@ -216,10 +226,7 @@ extension PhotoAlbumViewController: UICollectionViewDataSource {
     }
 
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        let section = fetchedResultsController.sections![section]
-        
-        noImagesLabel.hidden = section.numberOfObjects > 0
-        
+        let section = fetchedResultsController.sections![section]        
         return section.numberOfObjects
     }
     
