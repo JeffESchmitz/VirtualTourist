@@ -134,6 +134,7 @@ class PhotoAlbumViewController: UIViewController {
 
         automaticallyAdjustsScrollViewInsets = false
         navigationItem.rightBarButtonItem = editButtonItem()
+        self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "Back", style: .Plain, target: nil, action: nil)
         collectionView.allowsMultipleSelection = true
         
         initializeMap()
