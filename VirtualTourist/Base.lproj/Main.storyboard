@@ -233,6 +233,9 @@
                                     <constraint firstItem="jom-Oj-n8d" firstAttribute="centerX" secondItem="DfG-6O-R6V" secondAttribute="centerX" id="xSd-iN-A1C"/>
                                     <constraint firstItem="jom-Oj-n8d" firstAttribute="centerY" secondItem="DfG-6O-R6V" secondAttribute="centerY" id="yzo-6J-skw"/>
                                 </constraints>
+                                <connections>
+                                    <outlet property="delegate" destination="LKR-ld-2c0" id="XWZ-3u-f37"/>
+                                </connections>
                             </scrollView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
