@@ -44,7 +44,6 @@ class PhotoAlbumViewController: UIViewController {
     private var updatedIndexPaths: [NSIndexPath]!
 
     
-    
     // MARK: - UIViewController Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -57,14 +56,6 @@ class PhotoAlbumViewController: UIViewController {
         fetchPhotos()
         
         toggleNoImagesLabel()
-    }
-    
-    override func viewWillAppear(animated: Bool) {
-        super.viewDidAppear(animated)
-
-        if ((fetchedResultsController.fetchedObjects?.isEmpty) != nil) {
-            downloadPhotosFromFlickr()
-        }
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -81,8 +72,16 @@ class PhotoAlbumViewController: UIViewController {
             refreshRemoveButton.title = "Tap photos to delete"
         } else {
             refreshRemoveButton.title = "New Collection"
+            guard let selectedItems = collectionView.indexPathsForSelectedItems() else {
+                return
+            }
+            for indexPath in selectedItems {
+                collectionView.deselectItemAtIndexPath(indexPath, animated: true)
+                collectionView.cellForItemAtIndexPath(indexPath)!.alpha = 1.0
+            }
         }
     }
+    
     
     // MARK: - Actions
     @IBAction func refreshRemoveButtonTouched(sender: AnyObject) {
@@ -97,7 +96,8 @@ class PhotoAlbumViewController: UIViewController {
         }
     }
     
-    // MARK: - Private (to class, and static) functions
+    
+    // MARK: - Private (class-static) functions
     private func initializeView() {
         
         fetchedResultsController.delegate = self
@@ -128,13 +128,6 @@ class PhotoAlbumViewController: UIViewController {
         let region = MKCoordinateRegion(center: pin.coordinate, span: MKCoordinateSpanMake(1.0, 1.0))
         mapView.setRegion(region, animated: true)
         mapView.addAnnotation(pin)
-    }
-    
-    // TODO: JES - 7.15.2016 - Not sure this is needed anymore, delete if not.
-    private func downloadPhotosFromFlickr() {
-        
-//        refreshRemoveButton.enabled = false
-        
     }
     
     private func refreshPhotoCollection() {
@@ -263,11 +256,17 @@ extension PhotoAlbumViewController: UICollectionViewDataSource {
 extension PhotoAlbumViewController: UICollectionViewDelegate {
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        collectionView.cellForItemAtIndexPath(indexPath)!.alpha = 0.5
+        if editing {
+            collectionView.cellForItemAtIndexPath(indexPath)!.alpha = 0.5
+        } else {
+            collectionView.deselectItemAtIndexPath(indexPath, animated: false)
+        }
     }
     
     func collectionView(collectionView: UICollectionView, didDeselectItemAtIndexPath indexPath: NSIndexPath) {
-        collectionView.cellForItemAtIndexPath(indexPath)!.alpha = 1.0
+        if editing {
+            collectionView.cellForItemAtIndexPath(indexPath)!.alpha = 1.0
+        }
     }
 }
 
