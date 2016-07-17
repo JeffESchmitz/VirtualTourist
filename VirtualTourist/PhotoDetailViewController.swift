@@ -31,6 +31,7 @@ class PhotoDetailViewController: UIViewController, UIScrollViewDelegate {
     }
 
 
+    // MARK: - UIScrollViewDelegate
     func viewForZoomingInScrollView(scrollView: UIScrollView) -> UIView? {
         return self.imageView
     }

@@ -31,13 +31,4 @@ class PhotoCollectionViewCell: UICollectionViewCell {
         }
     }
     
-    // From the old iOS Persistence (step 5.5) to cancel the previous task when a value is set
-    var taskToCancelIfCellIsReused: NSURLSessionTask? {
-        didSet {
-            if let taskToCancel = oldValue {
-                taskToCancel.cancel()
-            }
-        }
-    }
-    
 }

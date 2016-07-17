@@ -112,20 +112,3 @@ class Client {
         return urlComponents.URL!
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

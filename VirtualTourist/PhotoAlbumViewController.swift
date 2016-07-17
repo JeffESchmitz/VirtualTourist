@@ -19,8 +19,7 @@ class PhotoAlbumViewController: UIViewController {
     @IBOutlet weak var refreshRemoveButton: UIBarButtonItem!
     
     // MARK: - Properties
-    var pin: Pin!
-//    lazy var pin: Pin = Pin()
+    lazy var pin: Pin = Pin()
     private var coreDataStack: CoreDataStack!
     private lazy var fetchedResultsController: NSFetchedResultsController = {
         
@@ -186,8 +185,6 @@ class PhotoAlbumViewController: UIViewController {
             
             // TODO: Consider adding a NSNotification to this class and the FlickrClient to communicate when all photo's are finished downloading instead of the completionHandler.
             dispatch_async(dispatch_get_main_queue(), {
-//                self.refreshRemoveButton.enabled = true
-                
                 self.toggleNoImagesLabel()
             })
         })
@@ -304,21 +301,3 @@ extension PhotoAlbumViewController: UICollectionViewDelegate {
         }
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

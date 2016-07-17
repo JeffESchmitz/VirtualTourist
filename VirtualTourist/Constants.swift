@@ -82,14 +82,12 @@ extension Client {
     }
     
     struct FlickrParameterValues {
-        
         static let Method                   = "flickr.photos.search"
         static let APIKey_Somewhere_Else    = "4120b4b57e0c20e206965d809d8d59e4"
         static let APIKey                   = "f1aeaeb551dde21a0cecb995ea5ac07f"
         static let Format                   = "json"
         static let NoJsonCallback           = "1"
         static let SafeSearch               = "1"
-//        static let Extras                   = "url_c"
         static let ExtrasMediumURL          = "url_m"
         static let PerPage                  = "21"
         
@@ -110,16 +108,3 @@ extension Client {
         static let Fail             = "fail"
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
