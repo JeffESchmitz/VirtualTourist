@@ -52,7 +52,7 @@ extension Client {
                     return
             }
             
-            pin.pageNumber = numberOfPhotoPages as! NSNumber
+            pin.pageNumber = numberOfPhotoPages as? NSNumber
 
             // If the number of photos returned from Flickr are less than default (21), update the number of photos per page to adjust for less images expected to be downloaded.
             if photoArray.count < Int(FlickrParameterValues.PerPage) {
@@ -112,7 +112,7 @@ extension Client {
 //                    NSFileManager.defaultManager().createFileAtPath(fileURL.path!, contents: result as! NSData, attributes: nil)
 //                    // END DEBUGGING
                     
-                    photo.imageData = result as! NSData
+                    photo.imageData = result as? NSData
                     
                     completionHandler(success: true, error: nil)
                 }

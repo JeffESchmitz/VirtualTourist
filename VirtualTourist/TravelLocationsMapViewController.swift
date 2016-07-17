@@ -49,10 +49,6 @@ class TravelLocationsMapViewController: UIViewController {
         centerMapOnLastLocation()
 
         fetchPins()
-    }
-    
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
         
         guard let pins = fetchedResultsController.fetchedObjects as? [Pin] else {
             print("fetchedObjects nil, returned no Pins - WTH?")
@@ -60,7 +56,7 @@ class TravelLocationsMapViewController: UIViewController {
         }
         addPinsToMap(pins)
     }
-
+    
     override func setEditing(editing: Bool, animated: Bool) {
         super.setEditing(editing, animated: animated)
         
