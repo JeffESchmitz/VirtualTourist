@@ -8,16 +8,31 @@
 
 import UIKit
 
-class PhotoDetailViewController: UIViewController {
+class PhotoDetailViewController: UIViewController, UIScrollViewDelegate {
 
-//    let selectedPhoto: Photo? = nil
-//    var pin: Pin!
-//    //    lazy var pin: Pin = Pin()
+    @IBOutlet weak var scrollView: UIScrollView!
+    @IBOutlet weak var imageView: UIImageView!
+    
     lazy var photo: Photo = Photo()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.scrollView.minimumZoomScale = 1.0
+        self.scrollView.maximumZoomScale = 6.0
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        if let image = photo.image {
+            self.imageView.image = image
+        }
+    }
+
+
+    func viewForZoomingInScrollView(scrollView: UIScrollView) -> UIView? {
+        return self.imageView
     }
 
 }
