@@ -81,10 +81,10 @@
             </objects>
             <point key="canvasLocation" x="558" y="496"/>
         </scene>
-        <!--Photo Album View Controller-->
+        <!--Photo Album View-->
         <scene sceneID="o4I-6u-HcB">
             <objects>
-                <viewController id="MQT-gH-39y" customClass="PhotoAlbumViewController" customModule="VirtualTourist" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Photo Album View" id="MQT-gH-39y" customClass="PhotoAlbumViewController" customModule="VirtualTourist" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="ycy-gv-pBn"/>
                         <viewControllerLayoutGuide type="bottom" id="Zdc-M0-8D1"/>
@@ -199,11 +199,30 @@
                         <outlet property="mapView" destination="ClX-42-Y2e" id="Jiq-QD-7sn"/>
                         <outlet property="noImagesLabel" destination="7JU-dW-Gvg" id="42o-C8-UQf"/>
                         <outlet property="refreshRemoveButton" destination="xj2-Uf-qb7" id="67Z-aS-YLm"/>
+                        <segue destination="LKR-ld-2c0" kind="show" identifier="OpenPhotoDetail" id="qC3-Pd-fPy"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ttB-DX-mfi" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1277" y="496"/>
+        </scene>
+        <!--Photo Detail View-->
+        <scene sceneID="5Nh-kc-mid">
+            <objects>
+                <viewController title="Photo Detail View" id="LKR-ld-2c0" customClass="PhotoDetailViewController" customModule="VirtualTourist" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="eaZ-aF-zOV"/>
+                        <viewControllerLayoutGuide type="bottom" id="sAX-da-6xj"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="8Oh-gY-Njg">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="IjZ-4D-2AI" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1977" y="496"/>
         </scene>
     </scenes>
 </document>

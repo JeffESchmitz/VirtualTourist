@@ -21,6 +21,8 @@ struct Constants {
 
     static let MapReuseId           = "Pin"
     static let OpenPhotoAlbum       = "OpenPhotoAlbum"
+    static let OpenPhotoDetail      = "OpenPhotoDetail"
+
     static let AllFilesDownloaded   = "AllFilesDownloaded"
     
     struct ColorPalette {

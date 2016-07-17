@@ -95,6 +95,17 @@ class PhotoAlbumViewController: UIViewController {
         }
     }
     
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == Constants.OpenPhotoDetail {
+            let viewController = segue.destinationViewController as! PhotoDetailViewController
+            
+            let selectedPhoto = sender as! Photo
+            print("selectedPhoto: \(selectedPhoto)")
+            
+            viewController.photo = selectedPhoto
+        }
+    }
+    
     
     // MARK: - Actions
     @IBAction func refreshRemoveButtonTouched(sender: AnyObject) {
@@ -279,6 +290,10 @@ extension PhotoAlbumViewController: UICollectionViewDelegate {
             collectionView.cellForItemAtIndexPath(indexPath)!.alpha = 0.5
         } else {
             collectionView.deselectItemAtIndexPath(indexPath, animated: false)
+            
+            let selectedPhoto = fetchedResultsController.objectAtIndexPath(indexPath) as! Photo
+            
+            self.performSegueWithIdentifier(Constants.OpenPhotoDetail, sender: selectedPhoto)
         }
     }
     
