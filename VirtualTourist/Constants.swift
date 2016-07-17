@@ -21,6 +21,7 @@ struct Constants {
 
     static let MapReuseId           = "Pin"
     static let OpenPhotoAlbum       = "OpenPhotoAlbum"
+    static let AllFilesDownloaded   = "AllFilesDownloaded"
     
     struct ColorPalette {
         static let UdacityBlue = UIColor(red:0.01, green:0.70, blue:0.89, alpha:1.0)

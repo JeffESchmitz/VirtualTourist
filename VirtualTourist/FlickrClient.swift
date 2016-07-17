@@ -12,7 +12,6 @@ import UIKit
 
 extension Client {
     
-    
     func downloadPhotos(forPin pin: Pin,
                                completionHandler: (result: AnyObject!, error: String?) -> Void) {
         
@@ -68,6 +67,12 @@ extension Client {
                     if success {
                         dispatch_async(dispatch_get_main_queue(), { 
                             self.coreDataStack.save()
+                            print("self.numberOfImagesToDownload: \(self.numberOfImagesToDownload)")
+                            self.numberOfImagesToDownload -= 1
+                            if self.numberOfImagesToDownload == 0 {
+                                NSNotificationCenter.defaultCenter().postNotificationName(Constants.AllFilesDownloaded, object: nil)
+                                self.numberOfImagesToDownload = Int(FlickrParameterValues.PerPage)!
+                            }
                         })
                     }
                 })
@@ -91,8 +96,7 @@ extension Client {
             } else {
                 
                 if let result = result {
-                    let image = UIImage(data: result as! NSData)
-                    
+
 //                    // DEBUGGING: Save the file to disk to check if image was correct
 //                    let fileName = (imageUrl as NSString).lastPathComponent
 //                    let dirPath = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0]

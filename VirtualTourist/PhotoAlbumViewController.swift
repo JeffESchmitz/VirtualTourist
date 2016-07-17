@@ -58,11 +58,24 @@ class PhotoAlbumViewController: UIViewController {
         toggleNoImagesLabel()
     }
     
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        refreshRemoveButton.enabled = true
+        // Subscribe to notification of when all images are completed downloading and saved.
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(PhotoAlbumViewController.finishedDownloadingImages(_:)), name: Constants.AllFilesDownloaded, object: nil)
+    }
+    
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         
         collectionView.layoutIfNeeded()
-        refreshRemoveButton.enabled = true
+    }
+    
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+        // Unsubscribe from notification
+        NSNotificationCenter.defaultCenter().removeObserver(self, name: Constants.AllFilesDownloaded, object: nil)
     }
     
     override func setEditing(editing: Bool, animated: Bool) {
@@ -94,6 +107,12 @@ class PhotoAlbumViewController: UIViewController {
         else {
             refreshPhotoCollection()
         }
+    }
+
+    
+    // MARK: - Selectors
+    func finishedDownloadingImages(notification: NSNotification) {
+        refreshRemoveButton.enabled = true
     }
     
     
@@ -155,7 +174,7 @@ class PhotoAlbumViewController: UIViewController {
             
             // TODO: Consider adding a NSNotification to this class and the FlickrClient to communicate when all photo's are finished downloading instead of the completionHandler.
             dispatch_async(dispatch_get_main_queue(), {
-                self.refreshRemoveButton.enabled = true
+//                self.refreshRemoveButton.enabled = true
                 
                 self.toggleNoImagesLabel()
             })
