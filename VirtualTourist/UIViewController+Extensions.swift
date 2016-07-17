@@ -11,7 +11,7 @@ import UIKit
 extension UIViewController {
     
     
-    // CREDIT: displayMessage taken from Ash Furrow's FunctionalReactiveAwesome repo - https://github.com/ashfurrow/FunctionalReactiveAwesome/blob/master/FunctionalReactiveAwesome/UIViewController%2BExtensions.swift
+    // Reference: displayMessage taken from Ash Furrow's FunctionalReactiveAwesome repo - https://github.com/ashfurrow/FunctionalReactiveAwesome/blob/master/FunctionalReactiveAwesome/UIViewController%2BExtensions.swift
     func displayMessage(message: String?, title: String?) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .Alert)
         
@@ -22,7 +22,8 @@ extension UIViewController {
         
         alert.addAction(ok)
         
-        self.presentViewController(alert, animated: true, completion: nil)
+        dispatch_async(dispatch_get_main_queue()) { 
+            self.presentViewController(alert, animated: true, completion: nil)
+        }
     }
-    
 }

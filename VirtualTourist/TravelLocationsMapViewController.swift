@@ -158,10 +158,6 @@ extension TravelLocationsMapViewController: MKMapViewDelegate {
         userDefaults.synchronize()
     }
     
-//    func mapView(mapView: MKMapView, didAddAnnotationViews views: [MKAnnotationView]) {
-//        fatalError("Not Implemented")
-//    }
-    
     func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
         
         var pinView = mapView.dequeueReusableAnnotationViewWithIdentifier(Constants.MapReuseId) as? MKPinAnnotationView
