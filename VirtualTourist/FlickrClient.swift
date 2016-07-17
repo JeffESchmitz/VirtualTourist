@@ -54,6 +54,11 @@ extension Client {
             
             pin.pageNumber = numberOfPhotoPages as! NSNumber
 
+            // If the number of photos returned from Flickr are less than default (21), update the number of photos per page to adjust for less images expected to be downloaded.
+            if photoArray.count < Int(FlickrParameterValues.PerPage) {
+                self.numberOfImagesToDownload = photoArray.count
+            }
+            
             for photoDictionary in photoArray {
                 guard let urlString = photoDictionary[FlickrResponseKeys.MediumURL] as? String else {
                     print("Unable to locate photo URL")
