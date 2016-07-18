@@ -17,14 +17,18 @@ class PhotoCollectionViewCell: UICollectionViewCell {
     override func prepareForReuse() {
         super.prepareForReuse()
         
-        activityIndicatorView.startAnimating()
+        dispatch_async(dispatch_get_main_queue()) {
+            self.activityIndicatorView.startAnimating()
+        }
     }
     
     func updateCell(photo: Photo?) {
         
         if let photoImage = photo?.image {
             cellImageView.image = photoImage
-            activityIndicatorView.stopAnimating()
+            dispatch_async(dispatch_get_main_queue(), {
+                self.activityIndicatorView.stopAnimating()
+            })
         }
         else {
             cellImageView.image = UIImage(named: "placeHolder")
