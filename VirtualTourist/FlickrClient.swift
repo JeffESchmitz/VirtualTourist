@@ -52,8 +52,10 @@ extension Client {
                     return
             }
             
-            pin.pageNumber = numberOfPhotoPages as? NSNumber
-
+            dispatch_async(dispatch_get_main_queue(), {
+                pin.pageNumber = numberOfPhotoPages as? NSNumber
+            })
+            
             // If the number of photos returned from Flickr are less than default (21), update the number of photos per page to adjust for less images expected to be downloaded.
             if photoArray.count < Int(FlickrParameterValues.PerPage) {
                 self.numberOfImagesToDownload = photoArray.count
@@ -65,22 +67,26 @@ extension Client {
                     continue
                 }
                 
-                let photo = Photo(imageUrl: urlString, pin: pin, context: self.coreDataStack.context)
-                
-                self.downloadImage(forPhoto: photo, completionHandler: { (success, error) in
+                dispatch_async(dispatch_get_main_queue(), {
+                    let photo = Photo(imageUrl: urlString, pin: pin, context: self.coreDataStack.context)
                     
-                    if success {
-                        dispatch_async(dispatch_get_main_queue(), { 
-                            self.coreDataStack.save()
-                            print("self.numberOfImagesToDownload: \(self.numberOfImagesToDownload)")
-                            self.numberOfImagesToDownload -= 1
-                            if self.numberOfImagesToDownload == 0 {
-                                NSNotificationCenter.defaultCenter().postNotificationName(Constants.AllFilesDownloaded, object: nil)
-                                self.numberOfImagesToDownload = Int(FlickrParameterValues.PerPage)!
-                            }
-                        })
-                    }
+                    self.downloadImage(forPhoto: photo, completionHandler: { (success, error) in
+                        
+                        if success {
+                            dispatch_async(dispatch_get_main_queue(), {
+                                self.coreDataStack.save()
+                                print("self.numberOfImagesToDownload: \(self.numberOfImagesToDownload)")
+                                self.numberOfImagesToDownload -= 1
+                                if self.numberOfImagesToDownload == 0 {
+                                    NSNotificationCenter.defaultCenter().postNotificationName(Constants.AllFilesDownloaded, object: nil)
+                                    self.numberOfImagesToDownload = Int(FlickrParameterValues.PerPage)!
+                                }
+                            })
+                        }
+                    })
                 })
+                
+
             }
             
             completionHandler(result: true, error: nil)
@@ -112,7 +118,9 @@ extension Client {
 //                    NSFileManager.defaultManager().createFileAtPath(fileURL.path!, contents: result as! NSData, attributes: nil)
 //                    // END DEBUGGING
                     
-                    photo.imageData = result as? NSData
+                    dispatch_async(dispatch_get_main_queue(), {
+                        photo.imageData = result as? NSData
+                    })
                     
                     completionHandler(success: true, error: nil)
                 }
